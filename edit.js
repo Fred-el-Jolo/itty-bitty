@@ -229,10 +229,16 @@ var maxLengths = {
 function updateLink(url, title, push) {
   if (title) title = encodeURIComponent(title.trim().replace(/\s/g, "_"));
   if (url.length) {
-    url = "/#" + (title || "") + "/" + url;
+    // removed '/'
+    url = "#" + (title || "") + "/" + url;
   } else {
     url = "/edit";
   }
+  
+  // Updated
+  var urlElement = document.getElementById('doc-url');
+  urlElement.innerText = url;
+  
   var hash = location.hash;
   if (push || !hash || !hash.length) {
     window.history.pushState(content.innerHTML, null, url);
